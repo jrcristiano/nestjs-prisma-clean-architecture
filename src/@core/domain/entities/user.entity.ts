@@ -1,5 +1,3 @@
-import { passwordHash } from "src/@core/infra/utils/password-hash";
-
 type UserProps = {
   name: string;
   lastname: string;
@@ -21,7 +19,7 @@ export class User {
   }
 
   get email() {
-    return this.props.email.toLocaleLowerCase();
+    return this.props.email.toLowerCase();
   }
 
   get password() {
@@ -30,7 +28,7 @@ export class User {
       return;
     }
 
-    return passwordHash(this.props.password)
+    return this.props.password;
   }
 
   getUser() {
@@ -39,5 +37,7 @@ export class User {
     };
   }
 
-
+  getUserJson() {
+    return JSON.stringify(this.getUser());
+  }
 }
