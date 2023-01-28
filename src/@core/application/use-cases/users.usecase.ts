@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/@core/infra/database/prisma/repositories/user.repository';
 import { CreateUserDto } from '../dto/requests/users/create-user.dto';
 import { UpdateUserDto } from '../dto/requests/users/update-user.dto';
@@ -15,13 +15,7 @@ export class UsersUseCase {
 	}
 
 	async findById(id: string) {
-		const user = await this.userRepository.findById(id);
-
-		if (!user) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-		}
-
-		return user;
+		return await this.userRepository.findById(id);
 	}
 
 	async findByEmail(email: string) {
@@ -39,12 +33,6 @@ export class UsersUseCase {
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto) {
-		const user = await this.userRepository.findById(id);
-
-		if (!user) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-		}
-
 		const userEntity = User.create(updateUserDto).getUser() as UpdateUserDto;
 		await this.userRepository.update(id, userEntity);
 
@@ -53,10 +41,6 @@ export class UsersUseCase {
 
 	async destroy(id: string) {
 		const user = await this.userRepository.findById(id);
-
-		if (!user) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-		}
 
 		await this.userRepository.destroy(id);
 
