@@ -3,10 +3,14 @@ type UserProps = {
   lastname: string;
   email: string;
   password?: string;
-}
+};
 
 export class User {
-  constructor(private props: UserProps) { }
+  private constructor(private props: UserProps) {}
+
+  static create(props: UserProps) {
+    return new User(props);
+  }
 
   get name() {
     const name = this.props.name;
@@ -33,8 +37,11 @@ export class User {
 
   getUser() {
     return {
-      ...this.props
-    };
+      name: this.name,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password,
+    } as UserProps;
   }
 
   getUserJson() {
