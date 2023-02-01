@@ -1,5 +1,5 @@
-import { hash } from 'bcryptjs';
+import { hashSync } from 'bcryptjs';
 
-export async function passwordHash(password: string, PASSWORD_SALT = 12) {
-	return await hash(password, PASSWORD_SALT);
+export function passwordHash(password: string, PASSWORD_SALT = 12) {
+	return hashSync(password, PASSWORD_SALT);
 }

@@ -5,11 +5,11 @@ import {
 	MiddlewareConsumer,
 } from '@nestjs/common';
 import { UsersUseCase } from 'src/@core/application/use-cases/users.usecase';
-import { PrismaService } from '../../../database/prisma/prisma.service';
-import { UserRepository } from '../../../database/prisma/repositories/user.repository';
-import { EmailAlreadyUsedRule } from 'src/@core/infra/validations/rules/email-already-used';
+import { PrismaService } from '../../../../database/prisma/prisma.service';
 import { UsersController } from 'src/@core/presentation/controllers/users/users.controller';
 import { FindUserMiddleware } from 'src/@core/presentation/middlewares/find-user/find-user.middleware';
+import { UserRepository } from 'src/@core/infra/database/prisma/repositories/user.repository';
+import { EmailAlreadyUsedRule } from 'src/@core/infra/validations/rules/email-already-used';
 
 @Module({
 	imports: [],
@@ -38,6 +38,7 @@ import { FindUserMiddleware } from 'src/@core/presentation/middlewares/find-user
 			inject: [UsersUseCase],
 		},
 	],
+	exports: [UsersUseCase],
 })
 export class UsersModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
