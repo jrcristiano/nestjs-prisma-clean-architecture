@@ -4,7 +4,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthUseCase } from 'src/@core/application/use-cases/auth.usecase';
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class AuthenticationStrategy extends PassportStrategy(Strategy) {
 	constructor(private authUseCase: AuthUseCase) {
 		super({
 			usernameField: 'email',
