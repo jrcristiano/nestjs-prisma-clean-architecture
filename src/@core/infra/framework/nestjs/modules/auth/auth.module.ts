@@ -15,14 +15,14 @@ import { AuthorizationStrategy } from './authorization.strategy';
 		PassportModule,
 		JwtModule.register({
 			secret: env.JWT_SECRET,
-			signOptions: { expiresIn: '3600s' },
+			signOptions: { expiresIn: env.JWT_EXPIRES_IN },
 		}),
 	],
 	controllers: [AuthController],
 	providers: [
-		AuthUseCase,
 		AuthenticationStrategy,
 		AuthorizationStrategy,
+		AuthUseCase,
 		PrismaService,
 		{
 			provide: UsersUseCase,
