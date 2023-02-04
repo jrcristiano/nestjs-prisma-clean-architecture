@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { UsersUseCase } from 'src/@core/application/use-cases/users.usecase';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
 import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { env } from 'process';
+import { AccessTokenResponseDto } from '../../dto/responses/jwt/access-token-response.dto';
+import { UserResponseDto } from '../../dto/responses/users/user.dto';
 
 @Injectable()
 export class AuthUseCase {
@@ -26,9 +28,11 @@ export class AuthUseCase {
 		return this.getAccessToken(user);
 	}
 
-	private async getAccessToken(payloadAuthUser: any) {
+	private async getAccessToken(
+		user: UserResponseDto,
+	): Promise<AccessTokenResponseDto> {
 		return {
-			access_token: this.jwtService.sign(payloadAuthUser),
+			access_token: this.jwtService.sign(user),
 			expires_in: env.JWT_EXPIRES_IN,
 		};
 	}

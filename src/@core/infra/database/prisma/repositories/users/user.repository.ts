@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/@core/application/dto/requests/users/create-user.dto';
 import { UpdateUserDto } from 'src/@core/application/dto/requests/users/update-user.dto';
-import { PrismaService } from '../prisma.service';
+import { PrismaService } from '../../prisma.service';
 
 const columns = {
 	id: true,
@@ -41,6 +41,7 @@ export class UserRepository {
 
 	async create(data: CreateUserDto) {
 		return await this.prisma.user.create({
+			select: columns,
 			data,
 		});
 	}
@@ -56,6 +57,7 @@ export class UserRepository {
 
 	async destroy(id: string) {
 		return await this.prisma.user.delete({
+			select: columns,
 			where: {
 				id,
 			},

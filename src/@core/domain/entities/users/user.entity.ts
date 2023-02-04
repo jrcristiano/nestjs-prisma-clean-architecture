@@ -46,11 +46,11 @@ export class User {
 		} as UserProps;
 
 		if (!this.password) {
-			return user;
+			return user as User;
 		}
 
 		user.password = this.password;
-		return user;
+		return user as User;
 	}
 
 	getUserJson() {

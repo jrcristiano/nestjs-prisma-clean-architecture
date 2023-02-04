@@ -1,7 +1,7 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthUseCase } from 'src/@core/application/use-cases/auth.usecase';
+import { AuthUseCase } from 'src/@core/application/use-cases/auth/auth.usecase';
 
 @Injectable()
 export class AuthenticationStrategy extends PassportStrategy(Strategy) {
