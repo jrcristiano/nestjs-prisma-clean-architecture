@@ -40,11 +40,6 @@ export class UsersUseCase {
 	}
 
 	async destroy(id: string) {
-		const user = await this.userRepository.findById(id);
-
-		await this.userRepository.destroy(id);
-
-		const userEntity = User.create(user).getUser() as UserResponseDto;
-		return userEntity as UserResponseDto;
+		return await this.userRepository.destroy(id);
 	}
 }

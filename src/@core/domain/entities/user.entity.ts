@@ -45,10 +45,11 @@ export class User {
 			email: this.email,
 		} as UserProps;
 
-		if (this.password) {
-			user.password = this.password;
+		if (!this.password) {
+			return user;
 		}
 
+		user.password = this.password;
 		return user;
 	}
 

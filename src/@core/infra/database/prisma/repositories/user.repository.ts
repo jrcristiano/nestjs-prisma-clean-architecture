@@ -8,8 +8,8 @@ const columns = {
 	name: true,
 	lastname: true,
 	email: true,
-	createdAt: true,
-	updatedAt: true,
+	created_at: true,
+	updated_at: true,
 };
 
 @Injectable()
