@@ -16,7 +16,13 @@ import { EmailAlreadyUsedRule } from 'src/@core/infra/validations/rules/email-al
 	controllers: [UsersController],
 	providers: [
 		PrismaService,
-		UsersUseCase,
+		{
+			provide: UsersUseCase,
+			useFactory: (prismaService: PrismaService) => {
+				return new UsersUseCase(new UserRepository(prismaService));
+			},
+			inject: [PrismaService],
+		},
 		UserRepository,
 		EmailAlreadyUsedRule,
 		FindUserMiddleware,

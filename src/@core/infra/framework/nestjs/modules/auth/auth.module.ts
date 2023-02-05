@@ -9,6 +9,7 @@ import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecas
 import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
 import { AuthorizationStrategy } from './strategies/authorization/authorization.strategy';
 import { AuthenticationStrategy } from './strategies/authentication/authentication.strategy';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
 	imports: [
@@ -22,8 +23,23 @@ import { AuthenticationStrategy } from './strategies/authentication/authenticati
 	providers: [
 		AuthenticationStrategy,
 		AuthorizationStrategy,
-		AuthUseCase,
-		UsersUseCase,
+		{
+			provide: AuthUseCase,
+			useFactory: (prismaService: PrismaService, jwtService: JwtService) => {
+				return new AuthUseCase(
+					new UsersUseCase(new UserRepository(prismaService)),
+					jwtService,
+				);
+			},
+			inject: [PrismaService, JwtService],
+		},
+		{
+			provide: UsersUseCase,
+			useFactory: (prismaService: PrismaService) => {
+				return new UsersUseCase(new UserRepository(prismaService));
+			},
+			inject: [PrismaService],
+		},
 		UserRepository,
 		PrismaService,
 	],

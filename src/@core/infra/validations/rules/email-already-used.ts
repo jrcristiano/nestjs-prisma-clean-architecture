@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
 	ValidatorConstraint,
 	ValidatorConstraintInterface,
@@ -13,7 +13,7 @@ export class EmailAlreadyUsedRule implements ValidatorConstraintInterface {
 	async validate(email: string) {
 		const user = await this.usersUseCase.findByEmail(email);
 		if (user) {
-			throw new HttpException('User already registered', HttpStatus.CONFLICT);
+			return false;
 		}
 
 		return true;

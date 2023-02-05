@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
 import { CreateUserDto } from '../../dto/requests/users/create-user.dto';
 import { UpdateUserDto } from '../../dto/requests/users/update-user.dto';
 import { User } from 'src/@core/domain/entities/users/user.entity';
 
-@Injectable()
 export class UsersUseCase {
 	constructor(private readonly userRepository: UserRepository) {}
 
