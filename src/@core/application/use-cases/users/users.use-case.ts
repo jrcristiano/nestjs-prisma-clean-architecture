@@ -1,4 +1,4 @@
-import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
+import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/users/user.repository';
 import { CreateUserDto } from '../../dto/requests/users/create-user.dto';
 import { UpdateUserDto } from '../../dto/requests/users/update-user.dto';
 import { User } from 'src/@core/domain/entities/users/user.entity';
@@ -20,7 +20,6 @@ export class UsersUseCase {
 
 	async create(createUserDto: CreateUserDto) {
 		const userEntity = User.create(createUserDto).getUser();
-
 		return await this.userRepository.create(userEntity);
 	}
 

@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport/dist';
 import { AuthUseCase } from 'src/@core/application/use-cases/auth/auth.usecase';
 import { AuthController } from 'src/@core/presentation/controllers/auth/auth.controller';
-import { PrismaService } from 'src/@core/infra/database/prisma/prisma.service';
+import { DatabaseService } from 'src/@core/infra/databases/prisma/database.service';
 import { JwtModule } from '@nestjs/jwt';
 import { env } from 'process';
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
-import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
+import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/users/user.repository';
 import { AuthorizationStrategy } from './strategies/authorization/authorization.strategy';
 import { AuthenticationStrategy } from './strategies/authentication/authentication.strategy';
 import { JwtService } from '@nestjs/jwt';
@@ -25,23 +25,26 @@ import { JwtService } from '@nestjs/jwt';
 		AuthorizationStrategy,
 		{
 			provide: AuthUseCase,
-			useFactory: (prismaService: PrismaService, jwtService: JwtService) => {
+			useFactory: (
+				databaseService: DatabaseService,
+				jwtService: JwtService,
+			) => {
 				return new AuthUseCase(
-					new UsersUseCase(new UserRepository(prismaService)),
+					new UsersUseCase(new UserRepository(databaseService)),
 					jwtService,
 				);
 			},
-			inject: [PrismaService, JwtService],
+			inject: [DatabaseService, JwtService],
 		},
 		{
 			provide: UsersUseCase,
-			useFactory: (prismaService: PrismaService) => {
-				return new UsersUseCase(new UserRepository(prismaService));
+			useFactory: (databaseService: DatabaseService) => {
+				return new UsersUseCase(new UserRepository(databaseService));
 			},
-			inject: [PrismaService],
+			inject: [DatabaseService],
 		},
 		UserRepository,
-		PrismaService,
+		DatabaseService,
 	],
 })
 export class AuthModule {}

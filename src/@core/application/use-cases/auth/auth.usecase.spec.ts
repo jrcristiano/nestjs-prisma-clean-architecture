@@ -1,12 +1,12 @@
-import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
-import { UsersUseCase } from '../users/users.usecase';
+import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/users/user.repository';
+import { UsersUseCase } from '../users/users.use-case';
 import { AuthUseCase } from './auth.usecase';
-import { PrismaService } from 'src/@core/infra/database/prisma/prisma.service';
+import { DatabaseService } from 'src/@core/infra/databases/prisma/database.service';
 import { JwtService } from '@nestjs/jwt';
 
 describe('AuthUseCase', () => {
 	const authUseCase = new AuthUseCase(
-		new UsersUseCase(new UserRepository(new PrismaService())),
+		new UsersUseCase(new UserRepository(new DatabaseService())),
 		new JwtService(),
 	);
 	it('should be defined', () => {

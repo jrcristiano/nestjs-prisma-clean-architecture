@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common/decorators';
 import { CreateUserDto } from 'src/@core/application/dto/requests/users/create-user.dto';
 import { UpdateUserDto } from 'src/@core/application/dto/requests/users/update-user.dto';
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
-import { AuthorizationGuard } from 'src/@core/infra/framework/nestjs/modules/auth/guards/authorization/authorization.guard';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
+import { AuthorizationGuard } from 'src/@core/infra/frameworks/nestjs/modules/auth/guards/authorization/authorization.guard';
 
 @Controller('users')
 export class UsersController {

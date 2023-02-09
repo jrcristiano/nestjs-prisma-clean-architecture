@@ -9,20 +9,28 @@ type UserProps = {
 };
 
 export class User {
-	private constructor(private props: UserProps) {}
+	private readonly props: UserProps;
+
+	private constructor(props: UserProps) {
+		this.props = props;
+	}
 
 	static create(props: UserProps) {
 		return new User(props);
 	}
 
 	get name() {
-		const name = this.props.name;
-		return name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
+		return (
+			this.props.name.charAt(0).toUpperCase() +
+			this.props.name.toLowerCase().slice(1)
+		);
 	}
 
 	get lastname() {
-		const lastname = this.props.lastname;
-		return lastname.charAt(0).toUpperCase() + lastname.toLowerCase().slice(1);
+		return (
+			this.props.lastname.charAt(0).toUpperCase() +
+			this.props.lastname.toLowerCase().slice(1)
+		);
 	}
 
 	get email() {
@@ -30,27 +38,16 @@ export class User {
 	}
 
 	get password() {
-		if (!this.props.password) {
-			delete this.props.password;
-			return;
-		}
-
-		return passwordHash(this.props.password);
+		return this.props.password ? passwordHash(this.props.password) : undefined;
 	}
 
 	getUser() {
-		const user = {
+		return {
 			name: this.name,
 			lastname: this.lastname,
 			email: this.email,
-		} as UserProps;
-
-		if (!this.password) {
-			return user as User;
-		}
-
-		user.password = this.password;
-		return user as User;
+			password: this.password,
+		};
 	}
 
 	getUserJson() {

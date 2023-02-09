@@ -1,4 +1,4 @@
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
 import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { env } from 'process';

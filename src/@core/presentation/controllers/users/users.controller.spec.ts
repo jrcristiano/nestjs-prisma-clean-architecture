@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
-import { PrismaService } from 'src/@core/infra/database/prisma/prisma.service';
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
-import { UserRepository } from 'src/@core/infra/database/prisma/repositories/users/user.repository';
+import { DatabaseService } from 'src/@core/infra/databases/prisma/database.service';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
+import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/users/user.repository';
 
 describe('UsersController', () => {
 	let controller: UsersController;
@@ -11,13 +11,13 @@ describe('UsersController', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [UsersController],
 			providers: [
-				PrismaService,
+				DatabaseService,
 				{
 					provide: UsersUseCase,
-					useFactory: (prismaService: PrismaService) => {
-						return new UsersUseCase(new UserRepository(prismaService));
+					useFactory: (databaseService: DatabaseService) => {
+						return new UsersUseCase(new UserRepository(databaseService));
 					},
-					inject: [PrismaService],
+					inject: [DatabaseService],
 				},
 			],
 		}).compile();

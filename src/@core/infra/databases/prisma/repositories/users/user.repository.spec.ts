@@ -1,8 +1,8 @@
-import { PrismaService } from '../../prisma.service';
+import { DatabaseService } from '../../database.service';
 import { UserRepository } from './user.repository';
 
 describe('UserRepository', () => {
-	const userRepository = new UserRepository(new PrismaService());
+	const userRepository = new UserRepository(new DatabaseService());
 	it('should be defined', () => {
 		expect(userRepository).toBeDefined();
 	});

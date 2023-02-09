@@ -3,7 +3,7 @@ import {
 	ValidatorConstraint,
 	ValidatorConstraintInterface,
 } from 'class-validator';
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
 
 @ValidatorConstraint({ name: 'EmailAlreadyUsedRule' })
 @Injectable()

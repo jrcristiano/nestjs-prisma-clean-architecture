@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common/enums';
 import { HttpException } from '@nestjs/common/exceptions';
-import { UsersUseCase } from 'src/@core/application/use-cases/users/users.usecase';
+import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
 import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
