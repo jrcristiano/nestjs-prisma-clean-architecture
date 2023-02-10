@@ -1,4 +1,4 @@
-import { passwordHash } from 'src/@core/infra/utils/password-hash';
+import { passwordHash } from 'src/@core/domain/value-objects/password-hash/password-hash.value-object';
 
 type UserProps = {
 	id?: string;
