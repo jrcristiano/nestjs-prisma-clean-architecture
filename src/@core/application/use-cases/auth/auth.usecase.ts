@@ -1,9 +1,9 @@
 import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
-import { compare } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { env } from 'process';
 import { AccessTokenResponseDto } from '../../dto/responses/jwt/access-token-response.dto';
 import { UserResponseDto } from '../../dto/responses/users/user.dto';
+import { comparePassword } from 'src/@core/domain/value-objects/password-hash/password-hash.value-object';
 
 export class AuthUseCase {
 	constructor(
@@ -20,7 +20,7 @@ export class AuthUseCase {
 			return null;
 		}
 
-		const validatedPassword = await compare(password, user.password);
+		const validatedPassword = comparePassword(password, user.password);
 		if (!validatedPassword) {
 			return null;
 		}

@@ -7,7 +7,7 @@ import {
 import { UsersUseCase } from 'src/@core/application/use-cases/users/users.use-case';
 import { DatabaseService } from '../../../../databases/prisma/database.service';
 import { UsersController } from 'src/@core/presentation/controllers/users/users.controller';
-import { FindUserMiddleware } from 'src/@core/infra/framework/nestjs/modules/users/middlewares/find-user/find-user.middleware';
+import { FindUserMiddleware } from './middlewares/find-user/find-user.middleware';
 import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/users/user.repository';
 import { EmailAlreadyUsedRule } from 'src/@core/infra/validations/rules/email-already-used';
 

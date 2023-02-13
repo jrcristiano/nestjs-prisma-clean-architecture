@@ -10,6 +10,10 @@ import { EmailAlreadyUsed } from 'src/@core/infra/validations/decorators/email-a
 export class CreateUserDto {
 	@IsString()
 	@IsNotEmpty()
+	id: string;
+
+	@IsString()
+	@IsNotEmpty()
 	@MinLength(2)
 	@MaxLength(255)
 	name: string;

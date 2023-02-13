@@ -1,4 +1,5 @@
 import { passwordHash } from 'src/@core/domain/value-objects/password-hash/password-hash.value-object';
+import { hash } from 'src/@core/infra/utils/uuid.util';
 
 type UserProps = {
 	id?: string;
@@ -17,6 +18,14 @@ export class User {
 
 	static create(props: UserProps) {
 		return new User(props);
+	}
+
+	get id() {
+		if (!this.props.id) {
+			return hash();
+		}
+
+		return this.props.id;
 	}
 
 	get name() {
@@ -43,6 +52,7 @@ export class User {
 
 	getUser() {
 		return {
+			id: this.id,
 			name: this.name,
 			lastname: this.lastname,
 			email: this.email,

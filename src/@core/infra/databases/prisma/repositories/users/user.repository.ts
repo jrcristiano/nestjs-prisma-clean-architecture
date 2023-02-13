@@ -65,4 +65,9 @@ export class UserRepository {
 			},
 		});
 	}
+
+	async truncate() {
+		await this.db.user.deleteMany({});
+		return [] as UserResponseDto[];
+	}
 }

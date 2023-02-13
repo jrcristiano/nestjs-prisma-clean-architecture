@@ -1,5 +1,11 @@
-import { hashSync } from 'bcryptjs';
+import { compareSync, hashSync } from 'bcryptjs';
 
-export function passwordHash(password: string, PASSWORD_SALT = 12) {
+const PASSWORD_SALT = 12;
+
+export function passwordHash(password: string) {
 	return hashSync(password, PASSWORD_SALT);
+}
+
+export function comparePassword(password: string, hash: string) {
+	return compareSync(password, hash);
 }
