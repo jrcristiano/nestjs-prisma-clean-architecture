@@ -9,6 +9,7 @@ describe('AuthUseCase', () => {
 		new UsersUseCase(new UserRepository(new DatabaseService())),
 		new JwtService(),
 	);
+
 	it('should be defined', () => {
 		expect(authUseCase).toBeDefined();
 	});

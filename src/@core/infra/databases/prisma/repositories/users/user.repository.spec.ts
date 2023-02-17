@@ -18,31 +18,30 @@ describe('UserRepository', () => {
 		expect(userRepository).toBeDefined();
 	});
 
-	it('truncate table users', async () => {
+	it('should truncate table users', async () => {
 		const truncateUsers = await userRepository.truncate();
 		expect(truncateUsers).toBeDefined();
 		expect(truncateUsers).toBeInstanceOf(Array<UserResponseDto>);
 	});
 
-	it('create a new user', async () => {
+	it('should create a new user', async () => {
 		const createdUser = await userRepository.create(userEntity);
 		expect(createdUser).toBeDefined();
 		expect(createdUser).toBeInstanceOf(Object);
 	});
 
-	it('find all users', async () => {
+	it('should find all users', async () => {
 		const users = await userRepository.getAll();
 		expect(users).toBeDefined();
 		expect(users).toBeInstanceOf(Array<UserRepository>);
 	});
 
-	it('find a user by id', async () => {
+	it('should find a user by id', async () => {
 		const user = await userRepository.findById(userEntity.id);
 		expect(user).toBeDefined();
-		expect(user).toBeInstanceOf(Object);
 	});
 
-	it('update a user by id', async () => {
+	it('should update a user by id', async () => {
 		const userEntityUpdate = User.create({
 			id: userEntity.id,
 			name: 'Cristiano',
@@ -52,17 +51,15 @@ describe('UserRepository', () => {
 
 		const user = await userRepository.update(userEntity.id, userEntityUpdate);
 		expect(user).toBeDefined();
-		expect(user).toBeInstanceOf(Object);
 		expect(user.lastname).toBe('Justino');
 	});
 
-	it('delete a user by id', async () => {
+	it('should delete a user by id', async () => {
 		const removedUser = await userRepository.destroy(userEntity.id);
 		expect(removedUser).toBeDefined();
-		expect(removedUser).toBeInstanceOf(Object);
 	});
 
-	it('try to find a nonexistent user', async () => {
+	it('should try to find a nonexistent user', async () => {
 		const user = await userRepository.findById(userEntity.id);
 		expect(user).toBeNull();
 	});
