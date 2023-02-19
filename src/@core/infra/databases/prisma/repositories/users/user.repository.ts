@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from 'src/@core/application/dto/requests/users/create-user.dto';
-import { UpdateUserDto } from 'src/@core/application/dto/requests/users/update-user.dto';
 import { DatabaseService } from '../../database.service';
 import { UserResponseDto } from 'src/@core/application/dto/responses/users/user.dto';
+import { User } from 'src/@core/domain/entities/users/user.entity';
 
 const columns = {
 	id: true,
@@ -40,14 +39,14 @@ export class UserRepository {
 		});
 	}
 
-	async create(data: CreateUserDto): Promise<UserResponseDto> {
+	async create(data: User): Promise<UserResponseDto> {
 		return await this.db.user.create({
 			select: columns,
 			data,
 		});
 	}
 
-	async update(id: string, data: UpdateUserDto): Promise<UserResponseDto> {
+	async update(id: string, data: User): Promise<UserResponseDto> {
 		return await this.db.user.update({
 			select: columns,
 			where: {

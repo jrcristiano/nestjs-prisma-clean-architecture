@@ -3,6 +3,7 @@ import { DatabaseService } from 'src/@core/infra/databases/prisma/database.servi
 import { UsersUseCase } from './users.use-case';
 import { User } from 'src/@core/domain/entities/users/user.entity';
 import { UpdateUserDto } from '../../dto/requests/users/update-user.dto';
+import { UserResponseDto } from '../../dto/responses/users/user.dto';
 
 describe('UsersUseCase', () => {
 	const usersUseCase = new UsersUseCase(
@@ -53,5 +54,11 @@ describe('UsersUseCase', () => {
 	it('should delete a user by id', async () => {
 		const removedUser = await usersUseCase.destroy(createUserDto.id);
 		expect(removedUser).toBeDefined();
+	});
+
+	it('should truncate table users', async () => {
+		const truncateUsers = await usersUseCase.truncate();
+		expect(truncateUsers).toBeDefined();
+		expect(truncateUsers).toBeInstanceOf(Array<UserResponseDto>);
 	});
 });

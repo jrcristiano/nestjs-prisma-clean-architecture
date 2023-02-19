@@ -57,7 +57,7 @@ export class User {
 			lastname: this.lastname,
 			email: this.email,
 			password: this.password,
-		};
+		} as User;
 	}
 
 	getUserJson() {

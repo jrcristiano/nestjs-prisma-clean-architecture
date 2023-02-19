@@ -20,6 +20,6 @@ export class EmailAlreadyUsedRule implements ValidatorConstraintInterface {
 	}
 
 	defaultMessage() {
-		return `Usuário já registrado`;
+		return 'Usuário já registrado';
 	}
 }

@@ -2,7 +2,6 @@ import { UserResponseDto } from 'src/@core/application/dto/responses/users/user.
 import { DatabaseService } from '../../database.service';
 import { UserRepository } from './user.repository';
 import { User } from 'src/@core/domain/entities/users/user.entity';
-import { UpdateUserDto } from 'src/@core/application/dto/requests/users/update-user.dto';
 
 describe('UserRepository', () => {
 	const userRepository = new UserRepository(new DatabaseService());
@@ -42,16 +41,16 @@ describe('UserRepository', () => {
 	});
 
 	it('should update a user by id', async () => {
-		const userEntityUpdate = User.create({
+		const user = User.create({
 			id: userEntity.id,
 			name: 'Cristiano',
 			lastname: 'Justino',
 			email: 'cristiano.junior.test@server.com',
-		}).getUser() as UpdateUserDto;
+		}).getUser();
 
-		const user = await userRepository.update(userEntity.id, userEntityUpdate);
-		expect(user).toBeDefined();
-		expect(user.lastname).toBe('Justino');
+		const updatedUser = await userRepository.update(userEntity.id, user);
+		expect(updatedUser).toBeDefined();
+		expect(updatedUser.lastname).toBe('Justino');
 	});
 
 	it('should delete a user by id', async () => {

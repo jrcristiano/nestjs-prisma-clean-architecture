@@ -12,7 +12,6 @@ import { UserRepository } from 'src/@core/infra/databases/prisma/repositories/us
 import { EmailAlreadyUsedRule } from 'src/@core/infra/validations/rules/email-already-used';
 
 @Module({
-	imports: [],
 	controllers: [UsersController],
 	providers: [
 		DatabaseService,

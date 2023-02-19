@@ -19,16 +19,20 @@ export class UsersUseCase {
 	}
 
 	async create(createUserDto: CreateUserDto) {
-		const userEntity = User.create(createUserDto).getUser();
-		return await this.userRepository.create(userEntity);
+		const user = User.create(createUserDto).getUser();
+		return await this.userRepository.create(user);
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto) {
-		const userEntity = User.create(updateUserDto).getUser();
-		return await this.userRepository.update(id, userEntity);
+		const user = User.create(updateUserDto).getUser();
+		return await this.userRepository.update(id, user);
 	}
 
 	async destroy(id: string) {
 		return await this.userRepository.destroy(id);
+	}
+
+	async truncate() {
+		return await this.userRepository.truncate();
 	}
 }
